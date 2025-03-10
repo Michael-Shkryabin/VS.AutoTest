@@ -1,5 +1,7 @@
+import pytest
 from playwright.sync_api import expect
 
+@pytest.mark.ignore_session # Этот тест не будет использовать сохранённую сессию
 def test_login(page):  # test_ в начале обязательно!
     page.goto("https://yobamos.veilstaff.com/login?returnUrl=%2Ffeed")
 
@@ -29,7 +31,7 @@ def test_login(page):  # test_ в начале обязательно!
     logout_button.wait_for(state="visible")
     expect(logout_button, "Кнопка 'Выйти' не отобраажется на странице").to_be_visible()
     logout_button.click()
-
+@pytest.mark.ignore_session
 def test_wrong_login(page):
     page.goto("https://yobamos.veilstaff.com/login?returnUrl=%2Ffeed")
 
